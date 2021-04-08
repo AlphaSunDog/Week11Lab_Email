@@ -26,8 +26,8 @@ public class ForgotPasswordServlet extends HttpServlet {
                 session.setAttribute("uuid", uuid);
                 getServletContext().getRequestDispatcher("/WEB-INF/reset.jsp").forward(request, response);
             }
-
-        } catch (Exception e) {
+        } 
+        catch (Exception e) {
             getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
         }
 
@@ -49,11 +49,13 @@ public class ForgotPasswordServlet extends HttpServlet {
                 if (t) {
                     request.setAttribute("message", "Password has been changed");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-                } else {
+                } 
+                else {
                     request.setAttribute("message", "uuid is invalid");
                     getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 }
-            } else {
+            } 
+            else {
                 request.setAttribute("message", "uuid is null");
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
             }
@@ -68,13 +70,12 @@ public class ForgotPasswordServlet extends HttpServlet {
                 String message = "Reset email send";
                 request.setAttribute("message", message);
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
-            } else {
+            } 
+            else {
                 String message = "Email does not exist";
                 request.setAttribute("message", message);
                 getServletContext().getRequestDispatcher("/WEB-INF/forgot.jsp").forward(request, response);
             }
         }
-
     }
-
 }

@@ -9,10 +9,10 @@
     <body>
         <h1>NoteKeeper</h1>
         <h2>Admin Control Panel</h2>
-        <p>
+            <p>
             Welcome ${username}<br>
             <a href=" <c:url value='/login' /> ">Log out</a>
-        </p>
+            </p>
         <%-- View all users --%>
         <h2>Manage Users</h2>
         <table cellpadding="5" border="1">

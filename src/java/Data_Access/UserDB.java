@@ -19,16 +19,16 @@ public class UserDB {
             Role role = em.find(Role.class, 3);
             user.setRole(role);
             
-            trans.begin();
+            trans.begin(); //begin transaction
             em.persist(user);
-            trans.commit();
+            trans.commit(); //commit changes
             return 1;
         } catch (Exception ex) {
-            trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot insert " + user.toString(), ex);
+            trans.rollback(); //rollback to fix the exception
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot insert " + user.toString(), ex); //write a note in logger about the insert exception
             throw new Exception("Error inserting user");
         } finally {
-            em.close();
+            em.close(); //close entity manager
         }
     }
 
@@ -36,16 +36,16 @@ public class UserDB {
         EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
-            trans.begin();
+            trans.begin(); //begin transaction
             em.merge(user);
-            trans.commit();
+            trans.commit(); //commit changes
             return 1;
         } catch (Exception ex) {
-            trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot update " + user.toString(), ex);
+            trans.rollback(); //rollback to fix the exception
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot update " + user.toString(), ex); //write a note in logger about the update exception
             throw new Exception("Error updating user");
         } finally {
-            em.close();
+            em.close(); //close entity manager
         }
     }
 
@@ -73,19 +73,18 @@ public class UserDB {
         EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
-            trans.begin();
+            trans.begin(); //begin transaction
             em.remove(em.merge(user));
-            trans.commit();
+            trans.commit(); //commit changes
             return 1;
         } catch (Exception ex) {
-            trans.rollback();
-            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot delete " + user.toString(), ex);
+            trans.rollback(); //rollback to fix the exception
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot delete " + user.toString(), ex); //write a note in logger about the delete exception
             throw new Exception("Error deleting user");
         } finally {
             em.close();
         }
     }
-    
     
      public User getUserByEmail(String email){
         EntityManager em = DBUtility.getEmFactory().createEntityManager();
@@ -93,7 +92,6 @@ public class UserDB {
          return user;
      }
     
-
     public User getUserByUUID(String uuid){
          EntityManager em = DBUtility.getEmFactory().createEntityManager();
          User user = em.createNamedQuery("User.findByResetPasswordUUID", User.class).setParameter("resetPasswordUUID", uuid).getSingleResult();
