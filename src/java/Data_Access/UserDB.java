@@ -1,18 +1,18 @@
-package dataaccess;
+package Data_Access;
 
-import utilities.DBUtil;
-import models.User;
+import Utilities.DBUtility;
+import Models.User;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import models.Role;
+import Models.Role;
 
 public class UserDB {
 
     public int insert(User user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
             // Give user a role (3 is regular user)
@@ -33,7 +33,7 @@ public class UserDB {
     }
 
     public int update(User user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
@@ -50,7 +50,7 @@ public class UserDB {
     }
 
     public List<User> getAll() throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         try {
             List<User> users = em.createNamedQuery("User.findAll", User.class).getResultList();
             return users;                
@@ -60,7 +60,7 @@ public class UserDB {
     }
 
     public User getUser(String username) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         try {
             User user = em.find(User.class, username);
             return user;
@@ -70,7 +70,7 @@ public class UserDB {
     }
 
     public int delete(User user) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         try {
             trans.begin();
@@ -88,14 +88,14 @@ public class UserDB {
     
     
      public User getUserByEmail(String email){
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
          User user = em.createNamedQuery("User.findByEmail", User.class).setParameter("email", email).getSingleResult();
          return user;
      }
     
 
     public User getUserByUUID(String uuid){
-         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+         EntityManager em = DBUtility.getEmFactory().createEntityManager();
          User user = em.createNamedQuery("User.findByResetPasswordUUID", User.class).setParameter("resetPasswordUUID", uuid).getSingleResult();
          return user;
     }

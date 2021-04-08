@@ -1,16 +1,16 @@
-package dataaccess;
+package Data_Access;
 
-import utilities.DBUtil;
+import Utilities.DBUtility;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import models.Note;
-import models.User;
+import Models.Note;
+import Models.User;
 
 public class NoteDB {
 
     public List<Note> getAll(String owner) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         
         try {
             User user = em.find(User.class, owner);
@@ -21,7 +21,7 @@ public class NoteDB {
     }
 
     public Note get(int noteId) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         
         try {
             Note note = em.find(Note.class, noteId);
@@ -32,7 +32,7 @@ public class NoteDB {
     }
 
     public void insert(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
@@ -50,7 +50,7 @@ public class NoteDB {
     }
 
     public void update(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
@@ -65,7 +65,7 @@ public class NoteDB {
     }
 
     public void delete(Note note) throws Exception {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityManager em = DBUtility.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
         try {
