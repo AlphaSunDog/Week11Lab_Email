@@ -18,6 +18,6 @@
             <input type="submit" value="Sign in">
         </form>
             <p>${message}</p>
-            <p><a href="reset" />Reset Password</p>
+            <p><a href="reset" />Forgot Password?</p>
     </body>
 </html>
